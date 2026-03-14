@@ -24,5 +24,7 @@ Kütüphane: Standart Python kütüphaneleri //Gerek görüreniz. (Ekstra kurulu
 Öncelikle bilgisayarınızda Python yüklü olduğundan emin olun.
 
 1.Bu depoyu (repository) bilgisayarınıza klonlayın: git clone https://github.com/elaaisceen/My-PythonLib.git
+
 2.Proje klasörüne gidin: cd My-PythonLib/Temel-Projeler/hesapMakinesi
+
 3.Uygulamayı çalıştırın: python hesapMakinesi.py
