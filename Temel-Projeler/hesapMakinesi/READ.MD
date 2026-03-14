@@ -22,7 +22,9 @@ Dil: Python
 
 Kütüphane: Standart Python kütüphaneleri //Gerek görüreniz. (Ekstra kurulum gerektirmez).
 
+
 📋 Nasıl Çalıştırılır?
+
 Öncelikle bilgisayarınızda Python yüklü olduğundan emin olun.
 
 1.Bu depoyu (repository) bilgisayarınıza klonlayın: git clone https://github.com/elaaisceen/My-PythonLib.git
