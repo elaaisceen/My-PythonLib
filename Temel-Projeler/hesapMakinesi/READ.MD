@@ -1,7 +1,9 @@
 🧮 Python Basic Calculator (Temel Hesap Makinesi)
+
 Python öğrenme sürecimde geliştirdiğim, kullanıcı etkileşimli temel bir hesap makinesi projesidir. Bu proje, Python programlama dili kullanılarak oluşturulmuş, kullanıcıdan alınan iki sayı ile temel matematiksel işlemleri gerçekleştiren basit bir konsol uygulamasıdır.
 
 🚀 Proje Hakkında
+
 Bu uygulama, konsol üzerinden kullanıcıdan alınan sayılarla dört temel matematiksel işlemi yapabilmektedir. Pythonun temel giriş/çıkış (input/output) ve kontrol yapılarını anlamak amacıyla geliştirilmiştir.
 
 📋 Desteklenen İşlemler
