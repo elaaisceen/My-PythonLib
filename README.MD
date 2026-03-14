@@ -1,10 +1,12 @@
 🐍 My-PythonLib: Python & AI Journey
 
-Bu depo, bir yazılım geliştiricisi ve üniversite öğrencisi olarak Python programlama dilindeki gelişimimi, teknik notlarımı ve hayata geçirdiğim projeleri sergilediğim kişisel dijital kütüphanemdir.
+Bu depo, yazılım geliştirici bir üniversite öğrencisi olarak Python programlama dilindeki gelişimimi, teknik notlarımı ve hayata geçirdiğim projeleri sergilediğim kişisel dijital kütüphanemdir.
+
 Sadece kod parçalarını değil, aynı zamanda öğrenme mantığımı ve karşılaştığım zorluklara bulduğum çözümleri de burada dökümante ediyorum.
 
 
 🎯 Projenin Amacı ve Hedefler
+
 Bu kütüphaneyi oluştururken önüme koyduğum ana hedefler şunlardır:
 
 Temelden Zirveye: Python syntax yapısından başlayarak karmaşık Yapay Zeka algoritmalarına kadar uzanan bir arşiv oluşturmak.
@@ -15,6 +17,7 @@ AI Entegrasyonu: Teorik bilgileri pratik projelere (Makine öğrenmesi, veri gö
 
 
 📂 Yol Haritası ve Klasör Yapısı
+
 Şu anki yapı ve gelecekte eklenmesi planlanan bölümler aşağıdadır:
 
 ⚙️ 01. Temel Python Projeleri
