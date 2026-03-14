@@ -5,7 +5,9 @@ Bu depo, yazılım geliştirici bir üniversite öğrencisi olarak Python progra
 Sadece kod parçalarını değil, aynı zamanda öğrenme mantığımı ve karşılaştığım zorluklara bulduğum çözümleri de burada dökümante ediyorum.
 
 
+
 🎯 Projenin Amacı ve Hedefler
+
 
 Bu kütüphaneyi oluştururken önüme koyduğum ana hedefler şunlardır:
 
@@ -16,7 +18,9 @@ Düzenli Dokümantasyon: Yazdığım her kodun ne işe yaradığını hem kendim
 AI Entegrasyonu: Teorik bilgileri pratik projelere (Makine öğrenmesi, veri görselleştirme vb.) dönüştürmek.
 
 
+
 📂 Yol Haritası ve Klasör Yapısı
+
 
 Şu anki yapı ve gelecekte eklenmesi planlanan bölümler aşağıdadır:
 
@@ -27,12 +31,14 @@ Hesap Makinesi: Kullanıcı etkileşimli, hata yakalama (exception handling) man
 
 Veri Tipleri Notları: Bellek yönetimi ve temel veri yapıları üzerine ders notları.
 
+
 🤖 02. Yapay Zeka ve Veri Bilimi (Geliştirme Aşamasında)
 Veri temizleme ve analiz süreçleri (Pandas, NumPy).
 
 Temel Makine Öğrenmesi modelleri (Linear Regression, KNN).
 
 Görüntü İşleme (OpenCV) denemeleri.
+
 
 📚 03. Kütüphane Notları ve İpuçları
 Python'da temiz kod (Clean Code) yazım kuralları.
@@ -47,6 +53,8 @@ Editör: VS Code / PyCharm
 
 Versiyon Kontrol: Git & GitHub
 
+
 👤 Hakkımda
+
 Elanur Tuana İşçen
 Bilgisayar Teknolojileri ve Bilişim Sistemleri öğrencisiyim ve teknoloji meraklısı. Tasarım, kodlama ve yapay zeka alanlarını birleştirerek inovatif projeler üretmeyi hedefliyorum.
