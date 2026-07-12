@@ -10,5 +10,5 @@ class ChatRequest(BaseModel):
     system_prompt: Optional[str] = Field(default="The system prompt to use for the chatbot", example="Hello, I'm a helpful assistant. How can I assist you?")
     temperature = Optional[float] =Field(default = 0.7 , ge=0.0 , le = 2.0)
 
-class ChatRsponse(BaseModel):
+class ChatResponse(BaseModel):
     result:str    
