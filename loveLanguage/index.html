@@ -30,73 +30,100 @@
         const phrases = [
             "I love you", "Seni seviyorum", "Te amo", "Je t'aime",
             "Ich liebe dich", "Ti amo", "Eu te amo", "Я тебя люблю",
-            "사랑해", "愛してる", "我爱你", "मैं तुमसे प्यार करता हूँ",
-            "Σ' αγαπώ", "Ik hou van jou", "Jag älskar dig", "Kocham cię",
-            "ฉันรักเธอ", "Anh yêu em", "Aku cinta kamu", "Я тебе кохаю"
+            "사랑해", "愛してる", "我爱你", "Σ' αγαπώ",
+            "Ik hou van jou", "Jag älskar dig", "Kocham cię", "ฉันรักเธอ",
+            "Anh yêu em", "Aku cinta kamu", "Я тебе кохаю"
         ];
 
-        // Kalp denklemi kontrolü (İçini doldurmak için)
-        function isInsideHeart(x, y) {
-            let nx = x / 150.0;
-            let ny = y / 150.0;
-            let eq = Math.pow(nx * nx + ny * ny - 1, 3) - (nx * nx * Math.pow(ny, 3));
-            return eq <= 0;
+        const SC = 20;
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
+        // Kalp poligonunu oluştur
+        let poly = [];
+        for (let i = 0; i < 720; i++) {
+            let a = (2 * Math.PI * i) / 720;
+            let x = 16 * Math.pow(Math.sin(a), 3);
+            let y = 13 * Math.cos(a) - 5 * Math.cos(2*a) - 2 * Math.cos(3*a) - Math.cos(4*a);
+            poly.push({ x: x * SC + centerX, y: -y * SC + centerY });
         }
 
-        let elements = [];
+        let yMax = Math.max(...poly.map(p => p.y));
+        let yMin = Math.min(...poly.map(p => p.y));
 
-        // 1. Aşama: Dış çerçeve noktaları
-        for (let i = 0; i < 628; i += 6) {
-            let k = i / 100.0;
-            let x = 16 * Math.pow(Math.sin(k), 3);
-            let y = 13 * Math.cos(k) - 5 * Math.cos(2*k) - 2 * Math.cos(3*k) - Math.cos(4*k);
-            
-            elements.push({
-                x: x * 20 + canvas.width / 2,
-                y: -y * 20 + canvas.height / 2,
-                text: phrases[Math.floor(Math.random() * phrases.length)],
-                hue: ((y * 20 + 200) / 400) * 360
-            });
+        let edges = [];
+        for (let i = 0; i < poly.length; i++) {
+            edges.push([poly[i], poly[(i + 1) % poly.length]]);
         }
 
-        // 2. Aşama: Yukarıdan aşağıya satır satır iç dolgu
-        for (let cy = -220; cy < 240; cy += 18) {
-            let hueVal = ((cy + 240) / 480) * 360;
-            for (let cx = -240; cx < 260; cx += 24) {
-                if (isInsideHeart(cx, cy)) {
-                    elements.push({
-                        x: cx + canvas.width / 2,
-                        y: cy + canvas.height / 2,
-                        text: phrases[Math.floor(Math.random() * phrases.length)],
-                        hue: hueVal
-                    });
+        function getSpans(y) {
+            let xs = [];
+            for (let [p1, p2] of edges) {
+                if ((p1.y <= y && y < p2.y) || (p2.y <= y && y < p1.y)) {
+                    let x = p1.x + (y - p1.y) * (p2.x - p1.x) / (p2.y - p1.y);
+                    xs.push(x);
+                }
+            }
+            xs.sort((a, b) => a - b);
+            let spansList = [];
+            for (let i = 0; i < xs.length; i += 2) {
+                if (i + 1 < xs.length) {
+                    spansList.push([xs[i], xs[i+1]]);
+                }
+            }
+            return spansList;
+        }
+
+        ctx.font = "bold 11px Arial";
+        let rowH = 16;
+        let placed = [];
+        let phraseIdx = 0;
+
+        // Satır satır düzgün yerleşim planı
+        for (let y = yMin + rowH/2; y < yMax - rowH/2; y += rowH) {
+            let spans = getSpans(y);
+            for (let [lo, hi] of spans) {
+                if (hi - lo < 25) continue;
+                let cur = lo + 10;
+                while (cur < hi - 10) {
+                    let text = phrases[phraseIdx % phrases.length];
+                    phraseIdx++;
+                    let w = ctx.measureText(text).width;
+                    if (cur + w < hi - 5) {
+                        let normY = (y - yMin) / (yMax - yMin);
+                        let hue = normY * 360; // Gökkuşağı tonu
+                        placed.push({
+                            x: cur + w/2,
+                            y: y,
+                            text: text,
+                            hue: hue
+                        });
+                        cur += w + 8;
+                    } else {
+                        break;
+                    }
                 }
             }
         }
 
-        // Akıcı ve yavaş animasyon döngüsü (Videodaki o keyifli akış için)
+        // Akıcı animasyon çizimi
         let currentIndex = 0;
         function animate() {
-            // Her karede kaç kelime çizileceğini ayarlayarak hızı kontrol edebilirsin (Şu an ideal ve akıcı)
-            let batchSize = 3; 
-            for (let b = 0; b < batchSize && currentIndex < elements.length; b++) {
-                let p = elements[currentIndex];
+            let batch = 6;
+            for (let i = 0; i < batch && currentIndex < placed.length; i++) {
+                let p = placed[currentIndex];
                 ctx.font = "bold 11px Arial";
-                
-                // Yukarıdan aşağıya yumuşak gökkuşağı geçişi
-                ctx.fillStyle = `hsl(${p.hue}, 100%, 60%)`;
+                ctx.fillStyle = `hsl(${p.hue}, 100%, 65%)`;
                 ctx.textAlign = "center";
                 ctx.fillText(p.text, p.x, p.y);
-                
                 currentIndex++;
             }
-
-            if (currentIndex < elements.length) {
+            if (currentIndex < placed.length) {
                 requestAnimationFrame(animate);
             }
         }
 
-        setTimeout(animate, 400);
+        setTimeout(animate, 300);
     </script>
 </body>
 </html>
