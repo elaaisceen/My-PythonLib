@@ -31,15 +31,13 @@
             "I love you", "Seni seviyorum", "Te amo", "Je t'aime",
             "Ich liebe dich", "Ti amo", "Eu te amo", "Я тебя люблю",
             "사랑해", "愛してる", "我爱你", "Σ' αγαπώ",
-            "Ik hou van jou", "Jag älskar dig", "Kocham cię", "ฉันรักเธอ",
-            "Anh yêu em", "Aku cinta kamu", "Я тебе кохаю"
+            "Ik hou van jou", "Jag älskar dig", "Kocham cię", "ฉันรักเธอ"
         ];
 
-        const SC = 20;
+        const SC = 22;
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
 
-        // Kalp poligonunu oluştur
         let poly = [];
         for (let i = 0; i < 720; i++) {
             let a = (2 * Math.PI * i) / 720;
@@ -74,31 +72,30 @@
             return spansList;
         }
 
-        ctx.font = "bold 11px Arial";
-        let rowH = 16;
+        ctx.font = "bold 10px Arial";
+        let rowH = 18; // Satır yüksekliği artırıldı
         let placed = [];
         let phraseIdx = 0;
 
-        // Satır satır düzgün yerleşim planı
         for (let y = yMin + rowH/2; y < yMax - rowH/2; y += rowH) {
             let spans = getSpans(y);
             for (let [lo, hi] of spans) {
-                if (hi - lo < 25) continue;
-                let cur = lo + 10;
-                while (cur < hi - 10) {
+                if (hi - lo < 30) continue;
+                let cur = lo + 5;
+                while (cur < hi - 5) {
                     let text = phrases[phraseIdx % phrases.length];
                     phraseIdx++;
                     let w = ctx.measureText(text).width;
-                    if (cur + w < hi - 5) {
+                    if (cur + w < hi) {
                         let normY = (y - yMin) / (yMax - yMin);
-                        let hue = normY * 360; // Gökkuşağı tonu
+                        let hue = normY * 360;
                         placed.push({
                             x: cur + w/2,
                             y: y,
                             text: text,
                             hue: hue
                         });
-                        cur += w + 8;
+                        cur += w + 12; // Kelimeler arası boşluk bırakıldı
                     } else {
                         break;
                     }
@@ -106,13 +103,12 @@
             }
         }
 
-        // Akıcı animasyon çizimi
         let currentIndex = 0;
         function animate() {
-            let batch = 6;
+            let batch = 5;
             for (let i = 0; i < batch && currentIndex < placed.length; i++) {
                 let p = placed[currentIndex];
-                ctx.font = "bold 11px Arial";
+                ctx.font = "bold 10px Arial";
                 ctx.fillStyle = `hsl(${p.hue}, 100%, 65%)`;
                 ctx.textAlign = "center";
                 ctx.fillText(p.text, p.x, p.y);
